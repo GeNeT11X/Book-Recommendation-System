@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - Book Recommender System</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #121212;  /* Dark background */
+            color: #e0e0e0;  /* Light text for contrast */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #00a65a;  /* Darker background for navbar */
+            padding: 15px 30px;  /* Increase padding for better spacing */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* Add shadow for a more dynamic look */
+        }
+
+        .navbar-brand {
+            color: #ffcc00 !important;  /* Bright yellow for navbar brand */
+            font-size: 30px;  /* Increase font size */
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s ease-in-out;  /* Smooth transition */
+        }
+
+        .navbar-brand:hover {
+            color: #ffeb3b !important;  /* Lighten on hover */
+            transform: scale(1.1);  /* Slight zoom effect */
+        }
+
+        .navbar-nav .nav-link {
+            color: #e0e0e0 !important;  /* Light color for navbar text */
+            font-size: 18px;  /* Increase font size for better readability */
+            font-weight: 500;
+            padding: 10px 20px;  /* More padding for a clickable feel */
+            transition: all 0.3s ease-in-out;  /* Smooth transition */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;  /* Bright yellow for hover effect */
+            background-color: rgba(255, 204, 0, 0.1);  /* Light yellow background on hover */
+            border-radius: 5px;  /* Rounded corners for a smooth hover effect */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            color: #ffcc00;  /* Bright yellow */
+            font-weight: bold;
+            margin-top: 40px;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .about-content {
+            text-align: center;
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            text-align: center;
+            color: #ffcc00;
+            font-size: 18px;
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .section-content {
+            font-size: 18px;
+            color: #e0e0e0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            margin-top: 20px;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+
+        .team-member-name {
+            font-size: 22px;
+            color: #ffcc00;
+        }
+
+        .team-member-role {
+            color: #b0b0b0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .col-md-3 {
+                flex-basis: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-md-3 {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">My Book Recommender</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/recommend">Recommend</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li> <!-- About Us -->
+        </ul>
+    </nav>
+
+    <!-- About Us content -->
+    <div class="container">
+        <h1>About Us</h1>
+
+        <div class="about-content">
+            <p>Welcome to the Book Recommender System! We are dedicated to helping you discover new books that match your preferences. Whether you're a fan of fiction, non-fiction, or looking for a new genre to explore, our system uses advanced algorithms to suggest books you'll love.</p>
+            <p>Our goal is to provide an intuitive and personalized experience that helps book lovers find their next great read. Thank you for using our platform!</p>
+        </div>
+
+        <div class="section-title">Our Mission</div>
+        <div class="section-content">
+            <p>Our mission is simple: to provide an easy-to-use book recommendation platform that helps readers discover books tailored to their personal tastes. We aim to create a seamless and enjoyable experience for book lovers everywhere!</p>
+        </div>
+
+        <div class="section-title">Contact Us</div>
+        <div class="section-content contact-info">
+            <p>If you have any questions or feedback, feel free to reach out to us:</p>
+            <p><strong>Email:</strong> <a href="mailto:harshprajapati9026@gmail.com" style="color: #ffcc00;">harshprajapati9026@gmail.com</a></p>
+            <p><strong>Developer:</strong> Harsh Prajapati</p>
+        </div>
+
+        <div class="section-title">Meet the Team</div>
+        <div class="row">
+            <div class="col-md-4 team-member">
+                <img src="https://via.placeholder.com/150" alt="Harsh Prajapati">
+                <p class="team-member-name">Harsh Prajapati</p>
+                <p class="team-member-role">Lead Developer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS & Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
