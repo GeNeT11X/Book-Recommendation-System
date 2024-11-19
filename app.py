@@ -1,5 +1,3 @@
-# Book-Recommendation-System
-
 from flask import Flask, render_template, request, redirect, url_for
 import pickle
 import numpy as np
@@ -52,16 +50,16 @@ def about():
     return render_template('about.html')  # Render the 'about.html' template
 
 def recommend(book_name):
-    # Convert input book_name to lowercase for case-insensitive matching
+    
     book_name_lower = book_name.lower()
     
-    # Check if the input book_name exists in pt.index (case-insensitive)
+    
     index = np.where(pt.index.str.lower() == book_name_lower)[0]
     
     if len(index) == 0:
         return "Book not found. Please check the spelling or try a different book."
     
-    index = index[0]  # Get the first match if found
+    index = index[0] 
     similar_items = sorted(list(enumerate(similarity_scores[index])), key=lambda x: x[1], reverse=True)[1:5]
     
     data = []
@@ -69,16 +67,16 @@ def recommend(book_name):
         item = []
         temp_df = books[books['Book-Title'].str.lower() == pt.index[i[0]].lower()]
         
-        # Add book title and author
+        
         item.extend(list(temp_df.drop_duplicates('Book-Title')['Book-Title'].values))
         item.extend(list(temp_df.drop_duplicates('Book-Title')['Book-Author'].values))
         
-        # Check for Image-URL-M; fall back to Image-URL-S or Image-URL-L if empty
+        
         image_url_m = temp_df.drop_duplicates('Book-Title')['Image-URL-M'].values
         image_url_s = temp_df.drop_duplicates('Book-Title')['Image-URL-S'].values
         image_url_l = temp_df.drop_duplicates('Book-Title')['Image-URL-L'].values
         
-        # Use Image-URL-M, fallback to Image-URL-S or Image-URL-L if necessary
+      
         if image_url_m.size > 0 and image_url_m[0]: 
             item.append(image_url_m[0])
         elif image_url_s.size > 0 and image_url_s[0]: 
@@ -86,7 +84,7 @@ def recommend(book_name):
         elif image_url_l.size > 0 and image_url_l[0]:  
             item.append(image_url_l[0])
         else:
-            item.append("default_image_url_here")  # Placeholder if no image is found
+            item.append("default_image_url_here")  
 
         data.append(item)
     
