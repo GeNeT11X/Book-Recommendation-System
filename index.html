@@ -3,165 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommender System</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Font Awesome (for icons) -->
+    <title>Top 50 Books - BookMagic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <style>
-        body {
-            background: linear-gradient(45deg, #121212, #1f1f1f);  /* Dark gradient background */
-            font-family: 'Arial', sans-serif;
-            color: #e0e0e0;  /* Light text color for better contrast */
+        :root {
+            --primary: #6b46c1;
+            --secondary: #9f7aea;
+            --accent: #fed7e2;
+            --background: #1a202c;
+            --card-bg: #2d3748;
+            --text: #e2e8f0;
+            --title: #f6e05e;
         }
 
+        body {
+            background: linear-gradient(135deg, var(--background), #2d3748);
+            color: var(--text);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+        }
+
+        
         .navbar {
-            background-color: #00a65a;  /* Darker background for navbar */
-            padding: 15px 30px;  /* Increase padding for better spacing */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* Add shadow for a more dynamic look */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .navbar-brand {
-            color: #ffcc00 !important;  /* Bright yellow for navbar brand */
-            font-size: 30px;  /* Increase font size */
+            color: var(--accent) !important;
+            font-size: 1.8rem;
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.3s ease-in-out;  /* Smooth transition */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .navbar-brand:hover {
-            color: #ffeb3b !important;  /* Lighten on hover */
-            transform: scale(1.1);  /* Slight zoom effect */
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
 
-        .navbar-nav .nav-link {
-            color: #e0e0e0 !important;  /* Light color for navbar text */
-            font-size: 18px;  /* Increase font size for better readability */
+        .nav-link {
+            color: var(--text) !important;
             font-weight: 500;
-            padding: 10px 20px;  /* More padding for a clickable feel */
-            transition: all 0.3s ease-in-out;  /* Smooth transition */
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #ffcc00 !important;  /* Bright yellow for hover effect */
-            background-color: rgba(255, 204, 0, 0.1);  /* Light yellow background on hover */
-            border-radius: 5px;  /* Rounded corners for a smooth hover effect */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        h1 {
-            font-size: 40px;
-            color: #ffcc00;  /* Bright yellow for title */
-            font-weight: bold;
-            text-align: center;
-            margin-top: 40px;
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
         }
 
         .card {
+            background: var(--card-bg);
             border: none;
-            margin-bottom: 30px;
-            background-color: #2c2c2c;  /* Dark background for cards */
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Darker shadow for depth */
+            border-radius: 15px;
             overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .card-body {
-            padding: 20px;
-            background-color: #2c2c2c;  /* Same dark background for card body */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(159,122,234,0.3);
+        }
+
+        .card-img-container {
+            height: 350px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.2);
+            position: relative;
+            padding: 1rem;
         }
 
         .card-img-top {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: contain;
-            border-radius: 8px;
+            transition: all 0.5s ease;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            background: linear-gradient(180deg, var(--card-bg), rgba(45,55,72,0.95));
         }
 
         .card-title {
-            font-size: 18px;
-            color: #ffcc00;  /* Yellow for the book titles to make them pop */
+            color: var(--title);
+            font-size: 1.2rem;
             font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.4;
         }
 
-        .card-author, .card-votes, .card-rating {
-            font-size: 16px;
-            color: #b0b0b0;  /* Light grey for additional text */
+        .card-author {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
         }
 
-        .card-rating span {
-            color: #ffcc00;  /* Gold for the rating stars */
-            font-size: 20px;
-        }
-
-        .card-votes, .card-author {
-            margin-top: 5px;
-        }
-
-        .container {
-            margin-top: 40px;
-        }
-
-        .col-md-3 {
+        .card-rating {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Make sure cards are responsive */
+        .rating-stars {
+            color: #ffd700;
+            font-size: 1.1rem;
+        }
+
+        .card-votes {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .votes-icon {
+            color: var(--secondary);
+        }
+
+        .page-title {
+        font-size: 2.5rem;
+        color: var(--accent);
+        text-align: center; /* Center align the title */
+        margin: 2rem 0; /* Optional: add margin for spacing */
+    }
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
+            .book-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.5rem;
             }
 
-            .col-md-3 {
-                flex-basis: 50%;
+            .card-img-container {
+                height: 300px;
             }
-        }
 
-        @media (max-width: 576px) {
-            .col-md-3 {
-                flex-basis: 100%;
+            .page-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/">My Book Recommender</a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/recommend">Recommend</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">📚 BookMagic</a>
+        <div class="navbar-nav">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/recommend">Discover</a>
+            <a class="nav-link" href="/about">About</a>
+        </div>
     </nav>
 
-    <!-- Main content -->
     <div class="container">
-        <h1>Top 50 Books</h1>
-        <div class="row">
+        <h1 class="page-title">✨ Top 50 Must-Read Books</h1>
+        
+        <div class="book-grid">
             {% for i in range(book_name|length) %}
-            <div class="col-md-3">
                 <div class="card">
-                    <img class="card-img-top" src="{{ image[i] }}" alt="{{ book_name[i] }}">
+                    <div class="card-img-container">
+                        <img class="card-img-top" src="{{ image[i] }}" alt="{{ book_name[i] }}">
+                    </div>
                     <div class="card-body">
-                        <p class="card-title">{{ book_name[i] }}</p>
-                        <p class="card-author">Author: {{ author[i] }}</p>
-                        <p class="card-votes">Votes: {{ votes[i] }}</p>
-                        <p class="card-rating">Rating: <span>{{ "%.2f"|format(rating[i]) }} <i class="fas fa-star"></i></span></p>
+                        <h5 class="card-title">{{ book_name[i] }}</h5>
+                        <p class="card-author">
+                            <i class="fas fa-pen-fancy"></i> {{ author[i] }}
+                        </p>
+                        <p class="card-rating">
+                            <span class="rating-stars">
+                                {{ "%.1f"|format(rating[i]) }}
+                                <i class="fas fa-star"></i>
+                            </span>
+                        </p>
+                        <p class="card-votes">
+                            <i class="fas fa-users votes-icon"></i>
+                            {{ votes[i] }} votes
+                        </p>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
 
-    <!-- Bootstrap JS & Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
