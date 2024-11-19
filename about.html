@@ -2,95 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Us - Book Recommender System</title>
+    <title>About Us - BookMagic</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome (for icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
+        :root {
+            --primary: #6b46c1;
+            --secondary: #9f7aea;
+            --accent: #fed7e2;
+            --background: #1a202c;
+            --card-bg: #2d3748;
+            --text: #e2e8f0;
+            --title: #f6e05e;
+        }
+
         body {
-            background-color: #121212;  /* Dark background */
-            color: #e0e0e0;  /* Light text for contrast */
+            background: linear-gradient(135deg, var(--background), #2d3748);
+            color: var(--text);
             font-family: 'Arial', sans-serif;
+            min-height: 100vh;
         }
 
         .navbar {
-            background-color: #00a65a;  /* Darker background for navbar */
-            padding: 15px 30px;  /* Increase padding for better spacing */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* Add shadow for a more dynamic look */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .navbar-brand {
-            color: #ffcc00 !important;  /* Bright yellow for navbar brand */
-            font-size: 30px;  /* Increase font size */
+            color: var(--accent) !important;
+            font-size: 1.8rem;
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            transition: all 0.3s ease-in-out;  /* Smooth transition */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .navbar-brand:hover {
-            color: #ffeb3b !important;  /* Lighten on hover */
-            transform: scale(1.1);  /* Slight zoom effect */
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
 
-        .navbar-nav .nav-link {
-            color: #e0e0e0 !important;  /* Light color for navbar text */
-            font-size: 18px;  /* Increase font size for better readability */
+        .nav-link {
+            color: var(--text) !important;
             font-weight: 500;
-            padding: 10px 20px;  /* More padding for a clickable feel */
-            transition: all 0.3s ease-in-out;  /* Smooth transition */
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #ffcc00 !important;  /* Bright yellow for hover effect */
-            background-color: rgba(255, 204, 0, 0.1);  /* Light yellow background on hover */
-            border-radius: 5px;  /* Rounded corners for a smooth hover effect */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        h1 {
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent) !important;
+        }
+
+        .page-title {
             text-align: center;
-            font-size: 50px;
-            color: #ffcc00;  /* Bright yellow */
+            color: var(--title);
+            font-size: 2.5rem;
             font-weight: bold;
-            margin-top: 40px;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            padding-bottom: 1rem;
         }
 
-        .container {
-            margin-top: 40px;
-        }
-
-        .about-content {
-            text-align: center;
-            font-size: 20px;
-            color: #e0e0e0;
-            margin-bottom: 40px;
-        }
-
-        .contact-info {
-            text-align: center;
-            color: #ffcc00;
-            font-size: 18px;
-            margin-top: 40px;
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         .section-title {
-            font-size: 30px;
+            font-size: 2rem;
+            color: var(--title);
             font-weight: bold;
-            color: #ffcc00;
-            margin-top: 30px;
+            margin-top: 3rem;
             text-align: center;
         }
 
         .section-content {
-            font-size: 18px;
-            color: #e0e0e0;
+            font-size: 1.2rem;
+            color: var(--text);
             text-align: center;
-            margin-top: 20px;
+            margin-top: 1rem;
         }
 
         .team-member {
-            margin-top: 20px;
+            margin-top: 30px;
+            text-align: center;
         }
 
         .team-member img {
@@ -100,24 +127,32 @@
         }
 
         .team-member-name {
-            font-size: 22px;
-            color: #ffcc00;
+            font-size: 1.5rem;
+            color: var(--title);
+            margin-top: 1rem;
         }
 
         .team-member-role {
-            color: #b0b0b0;
+            font-size: 1.2rem;
+            color: var(--accent);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .col-md-3 {
-                flex-basis: 50%;
+            .container {
+                padding: 1rem;
             }
-        }
 
-        @media (max-width: 576px) {
-            .col-md-3 {
-                flex-basis: 100%;
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .section-content {
+                font-size: 1rem;
             }
         }
     </style>
@@ -125,23 +160,18 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/">My Book Recommender</a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/recommend">Recommend</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li> <!-- About Us -->
-        </ul>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">📚 BookMagic</a>
+        <div class="navbar-nav">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/recommend">Discover</a>
+            <a class="nav-link" href="/about">About</a>
+        </div>
     </nav>
 
     <!-- About Us content -->
     <div class="container">
-        <h1>About Us</h1>
-
-        <div class="about-content">
-            <p>Welcome to the Book Recommender System! We are dedicated to helping you discover new books that match your preferences. Whether you're a fan of fiction, non-fiction, or looking for a new genre to explore, our system uses advanced algorithms to suggest books you'll love.</p>
-            <p>Our goal is to provide an intuitive and personalized experience that helps book lovers find their next great read. Thank you for using our platform!</p>
-        </div>
+        <h1 class="page-title">✨ About Us</h1>
 
         <div class="section-title">Our Mission</div>
         <div class="section-content">
@@ -149,21 +179,25 @@
         </div>
 
         <div class="section-title">Contact Us</div>
-        <div class="section-content contact-info">
+        <div class="section-content">
             <p>If you have any questions or feedback, feel free to reach out to us:</p>
-            <p><strong>Email:</strong> <a href="mailto:harshprajapati9026@gmail.com" style="color: #ffcc00;">harshprajapati9026@gmail.com</a></p>
-            <p><strong>Developer:</strong> Harsh Prajapati</p>
+            <p><strong>Email:</strong> <a href="mailto:harshprajapati9026@gmail.com" style="color: var(--accent);">harshprajapati9026@gmail.com</a></p>
+         
         </div>
 
         <div class="section-title">Meet the Team</div>
-        <div class="row">
-            <div class="col-md-4 team-member">
-                <img src="https://via.placeholder.com/150" alt="Harsh Prajapati">
+        <div class="row justify-content-center">
+            <div class="col-md-3 team-member">
                 <p class="team-member-name">Harsh Prajapati</p>
-                <p class="team-member-role">Lead Developer</p>
+            </div>
+            <div class="col-md-3 team-member">
+                <p class="team-member-name">Harsh Vardhan Singh</p>
+            </div>
+            <div class="col-md-3 team-member">
+                <p class="team-member-name">Riya Gupta</p>
             </div>
         </div>
-    </div>
+        
 
     <!-- Bootstrap JS & Dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -171,3 +205,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
